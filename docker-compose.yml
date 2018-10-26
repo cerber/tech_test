@@ -1,0 +1,63 @@
+version: "3"
+
+services:
+    postgresql: &DB
+      image: postgres
+      ports:
+        - 5432
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      # volumes:  # Persistent volume 
+      #   - ./deploy/postgresql/data:/var/lib/postgresql/data
+      
+      
+    tech-test1: &TECH_TEST
+      build: .
+      # command: /app/bin/tech_test foreground
+      command: /app/ecto_init.sh && /app/run.sh
+      ports:
+        - 4000
+      environment:
+        MIX_ENV: prod
+        PORT: 4000
+        DB_HOST: postgresql
+        DB_USERNAME: postgres
+        DB_PASSWORD: postgres
+      links:
+        - postgresql:postgresql
+      depends_on: 
+        - postgresql
+      
+      
+    tech-test2:
+      <<: *TECH_TEST
+      command: /app/run.sh
+    
+    
+    tech-test3:
+      <<: *TECH_TEST
+      command: /app/run.sh
+    
+    
+    haproxy:
+      image: haproxy
+      ports:
+        - 80:80
+      expose:
+        - 80
+      environment:
+        TECH_TEST_1_IP: tech-test1
+        TECH_TEST_2_IP: tech-test2
+        TECH_TEST_3_IP: tech-test3
+        TECH_TEST_PORT: 4000
+      volumes:
+        - ./deploy/haproxy/conf:/usr/local/etc/haproxy
+      links:
+        - tech-test1:tech-test1
+        - tech-test2:tech-test2
+        - tech-test3:tech-test3
+      depends_on: 
+        - tech-test1
+        - tech-test2
+        - tech-test3

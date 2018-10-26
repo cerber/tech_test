@@ -57,6 +57,7 @@ defmodule TechTestWeb.LeaguesController do
 
   def index(conn, _params) do
     Prometheus.Metric.Counter.inc(:get_league_counter)
+    Logger.debug "[get_league] processing"
     resp = ResultProcessor.get_leagues
     json conn, resp
   end

@@ -1,15 +1,12 @@
 defmodule TechTest.Application do
   use Application
 
-  alias Metrics.PrometheusHelper
-
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec
 
     Metrics.PrometheusExporter.setup()
-    # PrometheusHelper.unregister_system_collectors()
 
     # Define workers and child supervisors to be supervised
     children = [

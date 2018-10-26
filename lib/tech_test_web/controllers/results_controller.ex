@@ -82,6 +82,7 @@ defmodule TechTestWeb.ResultsController do
 
   def index(conn, params) do
     Prometheus.Metric.Counter.inc(:get_results_counter)
+    Logger.debug "[get_results] processing [#{inspect params}]"
     resp = ResultProcessor.get_results(params["league"], params["season"])
     json conn, resp
   end

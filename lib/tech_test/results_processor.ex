@@ -32,4 +32,12 @@ defmodule TechTest.ResultProcessor do
       )
     )
   end
+
+  def count_results(div, season) do
+    Repo.aggregate(
+      from(r in Result, where: r.div == ^div and r.season == ^season),
+      :count,
+      :result_id
+    )
+  end
 end

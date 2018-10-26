@@ -47,6 +47,7 @@ defmodule TechTest.Mixfile do
       {:csv, "~> 2.1.1"},           # CSV Decoding and Encoding for Elixir
       {:exprotobuf, "~> 1.2.9"},    # Protocol Buffers for Elixir
       {:prometheus_plugs, "~> 1.1.5"}, # Phoenix Prometheus plug for store metrics
+      {:distillery, "~> 2.0.10"}    # Build releases of project
     ]
   end
 
@@ -60,7 +61,8 @@ defmodule TechTest.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      "test": ["ecto.create --quiet", "ecto.migrate", "run priv/repo/seeds.exs", "test"]
     ]
   end
+
 end

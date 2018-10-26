@@ -17,6 +17,7 @@ defmodule TechTestWeb.Router do
 
   # Root scope SwaggerUI
   scope "/" do
+    options "/", TechTestWeb.OptionsController, :nothing
     forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :tech_test, swagger_file: "swagger.json"
   end
 
