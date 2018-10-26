@@ -5,10 +5,20 @@ To start your Phoenix server:
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Install Node.js dependencies with `cd assets && npm install`
+  * Initialize the ecto Repo with `mix ecto.create && mix ecto.migrate && mix run ./priv/repo/seed.exs`
   * Start Phoenix endpoint with `iex -S mix phx.server`
-  * Import data from CSV `Mix.Task.run("seed_results", ["./priv/data/data.csv"])`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## docker-compose Environment
+
+To start docker-compose environment
+  * install docker-compose tools with dependencies i.e. `apt install docker-compose`
+  * build application container using `docker-compose build`
+  * running the stack `docker-compose up`
+
+Now you can visit [`localhost`](http://localhost) from you browser. The `docker-compose` console shown 
+healthcheck OPTIONS requests to application servers. 
 
 ## Prometheus metrics
 
