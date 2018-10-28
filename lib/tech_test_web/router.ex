@@ -5,7 +5,7 @@ defmodule TechTestWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json", "protobuf"]
-#    plug PhoenixSwagger.Plug.Validate
+    # plug PhoenixSwagger.Plug.Validate
   end
 
   # Scope for API implementation
@@ -17,6 +17,7 @@ defmodule TechTestWeb.Router do
 
   # Root scope SwaggerUI
   scope "/" do
+    # OPTIONS HTTP request used for haproxy healthcheck
     options "/", TechTestWeb.OptionsController, :nothing
     forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :tech_test, swagger_file: "swagger.json"
   end

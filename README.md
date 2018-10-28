@@ -17,14 +17,16 @@ To start docker-compose environment
   * build application container using `docker-compose build`
   * running the stack `docker-compose up`
 
-Now you can visit [`localhost`](http://localhost) from you browser. The `docker-compose` console shown 
-healthcheck OPTIONS requests to application servers. 
+Now you can visit [`localhost:8080`](http://localhost:8080) from you browser. The `docker-compose` console shown
+healthcheck OPTIONS requests to application servers.
 
 ## Prometheus metrics
 
-Prometheus metrics is available on `/metrics` endpoint 
+Prometheus metrics is available on `/metrics` endpoint
 
-[`localhost/metrics:4000`](http://localhost/metrics:4000)
+[`localhost:4000/metrics`](http://localhost:4000/metrics)
+or [`localhost:8080/metrics`](http://localhost:8080/metrics) if `docker-compose` infrastructure running
+
 
 ```
 # TYPE get_league_counter counter
@@ -44,5 +46,3 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
-
-

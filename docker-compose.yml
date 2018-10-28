@@ -8,14 +8,14 @@ services:
       environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-      # volumes:  # Persistent volume 
+      # volumes:  # Persistent volume
       #   - ./deploy/postgresql/data:/var/lib/postgresql/data
-      
-      
+
+
     tech-test1: &TECH_TEST
       build: .
       # command: /app/bin/tech_test foreground
-      command: /app/ecto_init.sh && /app/run.sh
+      command: /app/run_init.sh
       ports:
         - 4000
       environment:
@@ -26,26 +26,32 @@ services:
         DB_PASSWORD: postgres
       links:
         - postgresql:postgresql
-      depends_on: 
+      depends_on:
         - postgresql
-      
-      
+
+
     tech-test2:
       <<: *TECH_TEST
       command: /app/run.sh
-    
-    
+      depends_on:
+        - tech-test1
+        - postgresql
+
+
     tech-test3:
       <<: *TECH_TEST
       command: /app/run.sh
-    
-    
+      depends_on:
+        - tech-test1
+        - postgresql
+
+
     haproxy:
       image: haproxy
       ports:
-        - 80:80
+        - 8080:8080
       expose:
-        - 80
+        - 8080
       environment:
         TECH_TEST_1_IP: tech-test1
         TECH_TEST_2_IP: tech-test2
@@ -57,7 +63,7 @@ services:
         - tech-test1:tech-test1
         - tech-test2:tech-test2
         - tech-test3:tech-test3
-      depends_on: 
+      depends_on:
         - tech-test1
         - tech-test2
         - tech-test3

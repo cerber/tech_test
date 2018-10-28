@@ -6,7 +6,10 @@ defmodule TechTest.ResultProcessor do
   alias TechTest.{Repo, Result}
 
   def get_leagues do
-    Repo.all(from(r in Result, distinct: true, select: %{:div => r.div, :season => r.season}))
+    Repo.all(
+      from(r in Result,
+        distinct: true,
+        select: %{:div => r.div, :season => r.season}))
   end
 
   def get_results(div, season) do
@@ -16,18 +19,18 @@ defmodule TechTest.ResultProcessor do
         r in Result,
         where: r.div == ^div and r.season == ^season,
         select: %{
-          :result_id => r.result_id,
-          :div => r.div,
-          :season => r.season,
-          :date => r.date,
-          :homeTeam => r.homeTeam,
-          :awayTeam => r.awayTeam,
-          :fthg => r.fthg,
-          :ftag => r.ftag,
-          :ftr => r.ftr,
-          :hthg => r.hthg,
-          :htag => r.htag,
-          :htr => r.htr
+          :result_id    => r.result_id,
+          :div          => r.div,
+          :season       => r.season,
+          :date         => r.date,
+          :homeTeam     => r.homeTeam,
+          :awayTeam     => r.awayTeam,
+          :fthg         => r.fthg,
+          :ftag         => r.ftag,
+          :ftr          => r.ftr,
+          :hthg         => r.hthg,
+          :htag         => r.htag,
+          :htr          => r.htr
         }
       )
     )

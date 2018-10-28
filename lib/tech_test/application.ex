@@ -6,6 +6,7 @@ defmodule TechTest.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    # Starts Prometheus exporter application
     Metrics.PrometheusExporter.setup()
 
     # Define workers and child supervisors to be supervised

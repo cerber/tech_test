@@ -7,7 +7,10 @@ defmodule TechTest.Mixfile do
       version: "0.0.1",
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext, :phoenix_swagger] ++ Mix.compilers,
+      # swagger compiler can't find Elixir.TechTestWeb.Router
+      # https://github.com/xerions/phoenix_swagger/issues/176
+      # compilers: [:phoenix, :gettext, :phoenix_swagger] ++ Mix.compilers,
+      compilers: [:phoenix, :gettext] ++ Mix.compilers() ++ [:phoenix_swagger],
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
       deps: deps()

@@ -4,17 +4,17 @@ defmodule TechTest.Result do
 
   schema "result" do
     field :result_id, :integer
-    field :div, :string
-    field :season, :string
-    field :date, :date
-    field :homeTeam, :string
-    field :awayTeam, :string
-    field :fthg, :integer
-    field :ftag, :integer
-    field :ftr, :string
-    field :hthg, :integer
-    field :htag, :integer
-    field :htr, :string
+    field :div,       :string
+    field :season,    :string
+    field :date,      :date
+    field :homeTeam,  :string
+    field :awayTeam,  :string
+    field :fthg,      :integer
+    field :ftag,      :integer
+    field :ftr,       :string
+    field :hthg,      :integer
+    field :htag,      :integer
+    field :htr,       :string
     timestamps()
   end
 

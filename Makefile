@@ -8,7 +8,7 @@ DOCKER_IMAGE_TAG 	?= $(APP_NAME)
 .PHONY: start stop build release
 
 build:: clean
-	@echo "Installing local hex and rebar for $(APP_NAME)..."
+@echo "Installing local hex and rebar for $(APP_NAME)..."
 	@mix local.hex --force
 	@mix local.rebar --force
 	@echo "Building release..."
@@ -19,6 +19,6 @@ release:: clean
 	@echo "Installing to /opt/$(APP_NAME)..."
 	docker build -t $(APP_NAME):latest .
 
-clean:: 
+clean::
 	@echo "Cleaning $(APP_NAME)..."
 	@mix clean

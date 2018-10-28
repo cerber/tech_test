@@ -31,4 +31,4 @@ WORKDIR $APP_HOME
 
 EXPOSE 4000
 
-CMD ["/app/run.sh"]
+CMD ["/app/run-init.sh"]
